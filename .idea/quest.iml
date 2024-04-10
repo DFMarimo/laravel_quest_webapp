@@ -123,6 +123,8 @@
       <excludeFolder url="file://$MODULE_DIR$/backend-laravel/vendor/tijsverkoyen/css-to-inline-styles" />
       <excludeFolder url="file://$MODULE_DIR$/backend-laravel/vendor/nunomaduro/collision" />
       <excludeFolder url="file://$MODULE_DIR$/backend-laravel/vendor/nunomaduro/termwind" />
+      <excludeFolder url="file://$MODULE_DIR$/backend-laravel/storage/app" />
+      <excludeFolder url="file://$MODULE_DIR$/backend-laravel/storage/framework" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
