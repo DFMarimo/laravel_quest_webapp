@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('uuid');
             $table->string('slug')->nullable();
             $table->string('best_answer_id')->nullable();
-            $table->string('author');
+            $table->string('author_id');
             $table->string('channel_id');
             $table->string('title');
             $table->text('body');

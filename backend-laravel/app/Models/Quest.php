@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -17,7 +18,7 @@ class Quest extends Model
         'uuid',
         'slug',
         'best_answer_id',
-        'author',
+        'author_id',
         'channel_id',
         'title',
         'body',
@@ -38,6 +39,11 @@ class Quest extends Model
         return $this->hasMany(Answer::class, 'quest_id', 'uuid');
     }
 
+    public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id', 'uuid');
+    }
+
     public function bestAnswer()
     {
         return $this->hasOne(Answer::class, 'quest_id', 'uuid');
@@ -53,7 +59,7 @@ class Quest extends Model
             'taggable_id',
             'uuid',
             'uuid'
-            );
+        );
 //        return $this->morphToMany(
 //            Tag::class,
 //            'taggable',

@@ -12,7 +12,7 @@ class Answer extends Model
     use HasFactory, HasSlug;
 
     protected $table = 'answers';
-    protected $fillable = ['title', 'body', 'quest_id', 'is_active', 'author', 'slug', 'deleted_at'];
+    protected $fillable = ['title', 'body', 'quest_id', 'is_active', 'author_id', 'slug', 'deleted_at'];
 
     public function getSlugOptions(): SlugOptions
     {
@@ -23,7 +23,7 @@ class Answer extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'author', 'uuid');
+        return $this->belongsTo(User::class, 'author_id', 'uuid');
     }
 
     public function quest()

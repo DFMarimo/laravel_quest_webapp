@@ -50,6 +50,11 @@ class User extends Authenticatable
         return $this->hasMany(Answer::class, 'author', 'uuid');
     }
 
+    public function quests()
+    {
+        return $this->hasMany(Quest::class, 'author', 'uuid');
+    }
+
     public function tags(): MorphToMany
     {
         return $this->morphToMany(

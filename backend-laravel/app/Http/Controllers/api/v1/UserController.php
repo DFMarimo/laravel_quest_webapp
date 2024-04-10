@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpCode;
@@ -30,7 +31,7 @@ class UserController extends Controller
                 $users = User::all();
             }
 
-            return $this->successRes($users, HttpCode::HTTP_OK, 'users returned.');
+            return $this->successRes(UserResource::collection($users->load('tags')), HttpCode::HTTP_OK, 'users returned.');
         } catch (\Exception $exception) {
             return $this->errorRes($exception->getMessage(), HttpCode::HTTP_INTERNAL_SERVER_ERROR, 'server error 500');
         }
@@ -39,11 +40,10 @@ class UserController extends Controller
     public function show($uuid)
     {
         try {
-            /* TODO return parent and child */
             $user = User::withTrashed()->where('uuid', $uuid)->first();
 
             return $user
-                ? $this->successRes($user, HttpCode::HTTP_OK, 'users returned.')
+                ? $this->successRes(new UserResource($user->load('quests', 'tags', 'answers')), HttpCode::HTTP_OK, 'users returned.')
                 : $this->successRes('', HttpCode::HTTP_NOT_FOUND, 'users not found');
 
         } catch (\Exception $exception) {
@@ -76,7 +76,7 @@ class UserController extends Controller
 
             $user->tags()->sync($request->input('tags'));
 
-            return $this->successRes($user, HttpCode::HTTP_OK, 'user update successfully.');
+            return $this->successRes(new UserResource($user->load('quests', 'tags', 'answers')), HttpCode::HTTP_OK, 'user update successfully.');
         } catch (\Exception $exception) {
             return $this->errorRes($exception->getMessage(), HttpCode::HTTP_INTERNAL_SERVER_ERROR, 'server error 500');
         }
@@ -105,7 +105,7 @@ class UserController extends Controller
 
             $user->tags()->sync($request->input('tags'));
 
-            return $this->successRes($user, HttpCode::HTTP_OK, 'user update successfully.');
+            return $this->successRes(new UserResource($user->load('quests', 'tags', 'answers')), HttpCode::HTTP_OK, 'user update successfully.');
         } catch (\Exception $exception) {
             return $this->errorRes($exception->getMessage(), HttpCode::HTTP_INTERNAL_SERVER_ERROR, 'server error 500');
         }
@@ -145,7 +145,7 @@ class UserController extends Controller
             $user = User::where('uuid', $uuid)->restore();
 
             return $user
-                ? $this->successRes($user, HttpCode::HTTP_OK, 'user restore successfully.')
+                ? $this->successRes(new UserResource($user->load('quests', 'tags', 'answers')), HttpCode::HTTP_OK, 'user restore successfully.')
                 : $this->successRes('', HttpCode::HTTP_NOT_FOUND, 'user not found');
 
         } catch (\Exception $exception) {

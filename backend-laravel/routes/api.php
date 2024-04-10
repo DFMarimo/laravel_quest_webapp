@@ -48,7 +48,7 @@ Route::controller(UserController::class)->prefix('users')->group(function () {
     Route::get('/clean', 'clean')->name('users.clean');
 });
 
-/* Users Routes */
+/* Quest Routes */
 Route::controller(QuestController::class)->prefix('quests')->group(function () {
     Route::get('/', 'index')->name('quests.index');
     Route::get('/{questUuid}', 'show')->name('quests.show');
@@ -60,6 +60,30 @@ Route::controller(QuestController::class)->prefix('quests')->group(function () {
     Route::get('/clean', 'clean')->name('quests.clean');
 });
 
-Route::get('/test',function (){
-   dd(\App\Models\Quest::first()->tags->pluck('name'));
+/* Tags Routes */
+Route::controller(TagController::class)->prefix('tags')->group(function () {
+    Route::get('/', 'index')->name('tags.index');
+    Route::get('/{tagsUuid}', 'show')->name('tags.show');
+    Route::post('/', 'store')->name('tags.store');
+    Route::patch('/{tagsUuid}', 'update')->name('tags.update');
+    Route::delete('/{tagsUuid}', 'delete')->name('tags.delete');
+    Route::delete('/{tagsUuid}', 'destroy')->name('tags.destroy');
+    Route::get('/{tagsUuid}/restore', 'restore')->name('tags.restore');
+    Route::get('/clean', 'clean')->name('tags.clean');
+});
+
+/* Answers Routes */
+Route::controller(AnswerController::class)->prefix('answers')->group(function () {
+    Route::get('/', 'index')->name('answers.index');
+    Route::get('/{answersUuid}', 'show')->name('answers.show');
+    Route::post('/', 'store')->name('answers.store');
+    Route::patch('/{answersUuid}', 'update')->name('answers.update');
+    Route::delete('/{answersUuid}', 'delete')->name('answers.delete');
+    Route::delete('/{answersUuid}', 'destroy')->name('answers.destroy');
+    Route::get('/{answersUuid}/restore', 'restore')->name('answers.restore');
+    Route::get('/clean', 'clean')->name('tags.clean');
+});
+
+Route::get('/test', function () {
+    dd('test');
 });

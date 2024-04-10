@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('uuid');
             $table->string('slug')->nullable();
-            $table->string('author');
+            $table->string('author_id');
             $table->string('quest_id');
             $table->text('body');
             $table->boolean('is_active')->default(false);
