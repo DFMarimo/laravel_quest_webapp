@@ -44,6 +44,11 @@ class Quest extends Model
         return $this->belongsTo(User::class, 'author_id', 'uuid');
     }
 
+    public function channel()
+    {
+        return $this->belongsTo(Channel::class, 'channel_id', 'uuid');
+    }
+
     public function bestAnswer()
     {
         return $this->hasOne(Answer::class, 'quest_id', 'uuid');

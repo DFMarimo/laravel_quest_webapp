@@ -19,7 +19,7 @@ class QuestResource extends JsonResource
             "uuid" => $this->uuid,
             "slug" => $this->slug,
             "best_answer_id" => $this->best_answer_id,
-            "channel_id" => $this->channel_id,
+            "channel_id" => $this->whenLoaded('channel'),
             "title" => $this->title,
             "body" => $this->body,
             "status" => $this->status,

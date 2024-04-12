@@ -27,6 +27,11 @@ class Channel extends Model
         'uuid', 'name', 'slug', 'parent_id', 'is_active'
     ];
 
+    public function quest()
+    {
+        return $this->hasMany(Quest::class, 'channel_id', 'uuid');
+    }
+
     public function child()
     {
         return $this->hasMany(Channel::class, 'parent_id', 'uuid');

@@ -30,7 +30,7 @@ class QuestController extends Controller
 
             /*QuestResource::collection($quests)*/
 
-            return $this->successRes(QuestResource::collection($quests->load('tags')), HttpCode::HTTP_OK, 'all quests returned.');
+            return $this->successRes(QuestResource::collection($quests->load(['tags' ,'author' ,'channel'])), HttpCode::HTTP_OK, 'all quests returned.');
 
         } catch (\Exception $exception) {
             return $this->errorRes($exception->getMessage(), HttpCode::HTTP_INTERNAL_SERVER_ERROR, 'server error 500');
